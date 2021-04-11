@@ -1,0 +1,7 @@
+{
+    "dbhost" : "database-1.c7zylvkuvuts.us-east-2.rds.amazonaws.com",
+    "dbuser": "root",
+    "dbpassword": "92YGdil863vKLefapLRa",
+    "dbdatabase": "mydb2",
+    "dbport": "3306"
+}

@@ -1,0 +1,41 @@
+service: aws-node-reto
+
+frameworkVersion: "1.54.0"
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  stage: dev
+  profile: deploy-aws
+  region: us-east-2
+
+functions:
+  obtenerPlanets:
+    handler: handler.obtenerPlanets
+    events:
+      - http:
+          method: get
+          path: /obtenerPlanets/{id}
+          request:
+            parameters:
+              path:
+                id: true
+  registrarPlanetBd:
+    handler: handler.registrarPlanetBd
+    events:
+      - http:
+          method: post
+          path: /registrarPlanetBd
+          request:
+            parameters: 
+              application/json: '{"$schema": "http://json-schema.org/draft-04/schema#","title" : "Empty Schema","type" : "object","properties":{"serviceName":{"type":"string"},"userID":{"type":"string","format":"email"}}}'
+  obtenerPlanetBd:
+    handler: handler.obtenerPlanetBd
+    events:
+      - http:
+          method: get
+          path: /obtenerPlanetBd/{id}
+          request:
+            parameters:
+              path:
+                id: true             

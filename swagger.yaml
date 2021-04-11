@@ -1,0 +1,145 @@
+swagger: "2.0"
+info:
+  description: "Api de de"
+  version: "1.0.0"
+  title: "AWS-NODE-RETO"
+  contact:
+    email: "luiggi.huaman.18@gmail.com"
+host: "mr65843s9k.execute-api.us-east-2.amazonaws.com"
+basePath: "/dev"
+tags:
+- name: "AWS-NODE-RETO"
+  description: "API que permite consultar peliculas de API SWAPI"
+paths:
+  /registrarPlanetBd:
+    post:
+      tags:
+      - "dev"
+      summary: "Registrar nuevo planeta"
+      description: "Recurso que permite agregar planetas a BD mysql"
+      operationId: "registrarPlanetBd"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Planeta que sera agregado en BD"
+        required: true
+        schema:
+          $ref: "#/definitions/Planet"
+      responses:
+        "400":
+          description: "Ocurrio un error"
+        "200":
+          description: "Creado correctamente"
+  /obtenerPlanets/{id}:
+    get:
+      tags:
+      - "dev"
+      summary: "Obtener lista de planetas"
+      description: "Obtener de API SWAPI informacion de planeta"
+      operationId: "obtenerPlanets"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID de planeta a obtener"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/PlanetApiResponse"
+        "400":
+          description: "Invalid ID supplied"
+          
+  /obtenerPlanetBd/{id}:
+    get:
+      tags:
+      - "dev"
+      summary: "Obtener lista de planetas de BD"
+      description: "Obtener de lista de planeta de BD Mysql"
+      operationId: "obtenerPlanetBd"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID de planeta a obtener"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/PlanetBDResponse"
+        "400":
+          description: "Invalid ID supplied"
+definitions:
+  Planet:
+    type: "object"
+    properties:
+      namePlanet:
+        type: "string"
+      climate:
+        type: "string"
+      gravity:
+        type: "string"
+  PlanetBDResponse:
+    type: array
+    items:
+      type: object
+      properties:
+        idplanet:
+          type: integer
+        namePlanet:
+          type: string
+        climate:
+          type: string
+        gravity:
+          type: string          
+  PlanetApiResponse:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      rotation_period:
+        type: "string"
+      orbital_period:
+        type: "string"
+      diameter:
+        type: "string"
+      climate:
+        type: "string"
+      gravity:
+        type: "string"
+      terrain:
+        type: "string"
+      population:
+        type: "string"
+      residents:
+        type: "array"
+        items:
+          type: string
+      films:
+        type: "array"
+        items:
+          type: string
+      created:
+        type: "string"
+        format: "date-time"
+      edited:
+        type: "string"
+        format: "date-time"
+      url:
+        type: "string"    
+        format: "date-time"
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
